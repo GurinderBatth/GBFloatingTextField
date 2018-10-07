@@ -1,0 +1,22 @@
+{
+  "name": "GBFloatingTextField",
+  "version": "0.1.0",
+  "summary": "A short description of GBFloatingTextField.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/mr.gsbatth@gmail.com/GBFloatingTextField",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "mr.gsbatth@gmail.com": "mr.gsbatth@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/mr.gsbatth@gmail.com/GBFloatingTextField.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "GBFloatingTextField/Classes/**/*"
+}

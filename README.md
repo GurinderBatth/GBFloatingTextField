@@ -22,7 +22,7 @@ pod 'GBFloatingTextField'
 
 ## Author
 
-mr.gsbatth@gmail.com, mr.gsbatth@gmail.com
+Gurinder Batth, mr.gsbatth@gmail.com
 
 ## License
 

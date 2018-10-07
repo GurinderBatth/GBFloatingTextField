@@ -1,0 +1,6 @@
+framework module GBFloatingTextField {
+  umbrella header "GBFloatingTextField-umbrella.h"
+
+  export *
+  module * { export * }
+}

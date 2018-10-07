@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'GBFloatingTextField'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of GBFloatingTextField.'
+  s.summary          = 'GBFloatingTextField is a Floting TextField.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,17 +18,17 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+GBFloatingTextField is a Floting TextField. Which also contains Left Image and Right Image. You also perform actions on Both Images.
                        DESC
 
-  s.homepage         = 'https://github.com/mr.gsbatth@gmail.com/GBFloatingTextField'
+  s.homepage         = 'https://github.com/GurinderBatth/GBFloatingTextField'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'mr.gsbatth@gmail.com' => 'mr.gsbatth@gmail.com' }
-  s.source           = { :git => 'https://github.com/mr.gsbatth@gmail.com/GBFloatingTextField.git', :tag => s.version.to_s }
+  s.author           = { 'Gurinder Batth' => 'mr.gsbatth@gmail.com' }
+  s.source           = { :git => 'https://github.com/GurinderBatth/GBFloatingTextField.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
 
   s.source_files = 'GBFloatingTextField/Classes/**/*'
   

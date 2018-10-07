@@ -1,0 +1,16 @@
+PODS:
+  - GBFloatingTextField (0.1.0)
+
+DEPENDENCIES:
+  - GBFloatingTextField (from `../`)
+
+EXTERNAL SOURCES:
+  GBFloatingTextField:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  GBFloatingTextField: 507e57d8210ebb9893a6bed5d63584662a1a6e44
+
+PODFILE CHECKSUM: 7639ffd4c19ec10b6b2c6b648fea9613e2f43bc9
+
+COCOAPODS: 1.5.3
