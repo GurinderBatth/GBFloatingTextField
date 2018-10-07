@@ -183,7 +183,7 @@ public class GBTextField: UITextField {
         self.addViews()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.addViews()
     }
