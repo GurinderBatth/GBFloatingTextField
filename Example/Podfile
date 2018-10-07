@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'GBFloatingTextField_Example' do
+  pod 'GBFloatingTextField', :path => '../'
+
+  target 'GBFloatingTextField_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
