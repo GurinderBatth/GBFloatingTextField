@@ -244,6 +244,7 @@ class GBTextField: UITextField {
         self.constraintFloatingLabelLeft.isActive = true
         self.constraintFloatingLabelHeight = self.labelPlaceholder.heightAnchor.constraint(equalTo: self.heightAnchor, constant: 0)
         self.constraintFloatingLabelHeight.isActive = true
+        setupLine()
     }
     
     private func setupLine(){
@@ -253,11 +254,13 @@ class GBTextField: UITextField {
                     return
                 }
             }
+            viewLine.backgroundColor = lineColor
             addSubview(self.viewLine)
             viewLine.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
             viewLine.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
             viewLine.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
             constraintLineHeight = viewLine.heightAnchor.constraint(equalToConstant: lineHeight)
+            viewLine.backgroundColor = lineColor
             constraintLineHeight?.isActive = true
         }
     }
@@ -272,6 +275,7 @@ class GBTextField: UITextField {
         labelError.topAnchor.constraint(equalTo: self.viewLine.bottomAnchor, constant: 0).isActive = true
         labelError.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
         labelError.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        labelError.textColor = errorColor
         labelError.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
