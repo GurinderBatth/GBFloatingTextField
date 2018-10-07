@@ -44,7 +44,7 @@ public class GBTextField: UITextField {
     @IBInspectable
     public var lineColor: UIColor = .darkGray{
         didSet{
-            self.viewLine.backgroundColor = lineColor
+            self.viewLine?.backgroundColor = lineColor
         }
     }
     
@@ -131,7 +131,7 @@ public class GBTextField: UITextField {
     var viewRight: UIView?
     var viewLeft: UIView?
     
-    lazy var viewLine:UIView = {
+    lazy var viewLine:UIView? = {
         let prntView = UIView()
         prntView.translatesAutoresizingMaskIntoConstraints = false
         return prntView
@@ -167,10 +167,10 @@ public class GBTextField: UITextField {
                 self.setupError()
             }else{
                 if isEditing{
-                    self.viewLine.backgroundColor = selectedLineColor
+                    self.viewLine?.backgroundColor = selectedLineColor
                     self.labelPlaceholder.textColor = selectedTitleColor
                 }else{
-                    self.viewLine.backgroundColor = lineColor
+                    self.viewLine?.backgroundColor = lineColor
                     self.labelPlaceholder.textColor = titleLabelColor
                 }
                 self.labelError.isHidden = true
@@ -183,7 +183,7 @@ public class GBTextField: UITextField {
         self.addViews()
     }
     
-    public required init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.addViews()
     }
@@ -195,7 +195,7 @@ public class GBTextField: UITextField {
             self.labelError.isHidden = false
             labelError.textColor = errorColor
             labelError.text = error
-            viewLine.backgroundColor = errorColor
+            viewLine?.backgroundColor = errorColor
             if let text = text{
                 if text.count > 0{
                     labelPlaceholder.textColor = errorColor
@@ -242,7 +242,6 @@ public class GBTextField: UITextField {
         self.constraintFloatingLabelLeft.isActive = true
         self.constraintFloatingLabelHeight = self.labelPlaceholder.heightAnchor.constraint(equalTo: self.heightAnchor, constant: 0)
         self.constraintFloatingLabelHeight.isActive = true
-        setupLine()
     }
     
     func setupLine(){
@@ -252,14 +251,15 @@ public class GBTextField: UITextField {
                     return
                 }
             }
-            viewLine.backgroundColor = lineColor
-            addSubview(self.viewLine)
-            viewLine.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
-            viewLine.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-            viewLine.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-            constraintLineHeight = viewLine.heightAnchor.constraint(equalToConstant: lineHeight)
-            viewLine.backgroundColor = lineColor
-            constraintLineHeight?.isActive = true
+            if viewLine != nil{
+                addSubview(self.viewLine!)
+                viewLine?.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+                viewLine?.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+                viewLine?.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+                constraintLineHeight = viewLine?.heightAnchor.constraint(equalToConstant: lineHeight)
+                viewLine?.backgroundColor = lineColor
+                constraintLineHeight?.isActive = true
+            }
         }
     }
     
@@ -284,12 +284,12 @@ public class GBTextField: UITextField {
         }else{
             constraintLineHeight?.constant = selectedLineHeight
         }
-        self.viewLine.backgroundColor = selectedLineColor
+        self.viewLine?.backgroundColor = selectedLineColor
         if let count = self.text?.count{
             if count > 0{
                 self.labelPlaceholder.textColor = selectedTitleColor
                 if showError{
-                    viewLine.backgroundColor = errorColor
+                    viewLine?.backgroundColor = errorColor
                     labelPlaceholder.textColor = errorColor
                 }
             }
@@ -299,7 +299,7 @@ public class GBTextField: UITextField {
     
     override public func resignFirstResponder() -> Bool {
         constraintLineHeight?.constant = lineHeight
-        self.viewLine.backgroundColor = lineColor
+        self.viewLine?.backgroundColor = lineColor
         if let count = self.text?.count{
             if count > 0{
                 self.labelPlaceholder.textColor = titleLabelColor
@@ -307,7 +307,7 @@ public class GBTextField: UITextField {
                 self.labelPlaceholder.textColor = .clear
             }
             if showError{
-                viewLine.backgroundColor = errorColor
+                viewLine?.backgroundColor = errorColor
                 labelPlaceholder.textColor = errorColor
             }
         }else{
@@ -322,7 +322,7 @@ public class GBTextField: UITextField {
                 if self.showError != false{
                     self.showError = false
                     self.labelPlaceholder.textColor = self.selectedTitleColor
-                    self.viewLine.backgroundColor = self.selectedLineColor
+                    self.viewLine?.backgroundColor = self.selectedLineColor
                 }
                 if self.constraintFloatingLabelTop.constant != -15{
                     self.constraintFloatingLabelHeight.isActive = false
@@ -351,3 +351,4 @@ public class GBTextField: UITextField {
         }
     }
 }
+

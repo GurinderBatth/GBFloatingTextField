@@ -16,10 +16,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         textField = GBTextField(frame: CGRect(x:10, y: 100, width: UIScreen.main.bounds.width - 20, height: 40))
-        textField.showErrorMessage("This is Text Error")
         textField.lineColor = .black
         textField.titleLabelColor = .black
         textField.lineHeight = 1
+        textField.showErrorMessage("This is Text Error")
         self.view.addSubview(textField)
         
     }
