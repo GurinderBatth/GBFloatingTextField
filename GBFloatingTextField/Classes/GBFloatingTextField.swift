@@ -192,7 +192,6 @@ public class GBTextField: UITextField {
         if error.count > 0{
             self.showError = true
             self.setupError()
-            print(labelError)
             self.labelError.isHidden = false
             labelError.textColor = errorColor
             labelError.text = error
@@ -225,7 +224,6 @@ public class GBTextField: UITextField {
             self.gbTextFieldDelegate?.gbLeftView!(textField)
         }else{
             self.showErrorMessage("Please implement left GBFloatingTextField Delegate")
-            //print("NIL")
         }
     }
     
@@ -272,7 +270,7 @@ public class GBTextField: UITextField {
             }
         }
         addSubview(self.labelError)
-        labelError.topAnchor.constraint(equalTo: self.viewLine.bottomAnchor, constant: 0).isActive = true
+        labelError.topAnchor.constraint(equalTo: self.bottomAnchor, constant: lineHeight).isActive = true
         labelError.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
         labelError.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         labelError.textColor = errorColor
