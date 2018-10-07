@@ -11,9 +11,17 @@ import GBFloatingTextField
 
 class ViewController: UIViewController {
 
+    var textField: GBTextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        textField = GBTextField(frame: CGRect(x:10, y: 100, width: UIScreen.main.bounds.width - 20, height: 40))
+        textField.showErrorMessage("This is Text Error")
+        textField.lineColor = .black
+        textField.titleLabelColor = .black
+        textField.lineHeight = 1
+        self.view.addSubview(textField)
+        
     }
 
     override func didReceiveMemoryWarning() {
