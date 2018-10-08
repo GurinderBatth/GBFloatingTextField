@@ -211,20 +211,12 @@ public class GBTextField: UITextField {
     
     @objc func rightViewSelected(_ gesture: UITapGestureRecognizer){
         let textField = gesture.view?.superview as? GBTextField
-        if self.gbTextFieldDelegate?.gbRightView?(textField) != nil{
-            self.gbTextFieldDelegate?.gbRightView!(textField)
-        }else{
-            self.showErrorMessage("Please implement right GBFloatingTextField Delegate")
-        }
+        self.gbTextFieldDelegate?.gbRightView?(textField)
     }
     
     @objc func leftViewSelected(_ gesture: UITapGestureRecognizer){
         let textField = gesture.view?.superview as? GBTextField
-        if self.gbTextFieldDelegate?.gbLeftView?(textField) != nil{
-            self.gbTextFieldDelegate?.gbLeftView!(textField)
-        }else{
-            self.showErrorMessage("Please implement left GBFloatingTextField Delegate")
-        }
+        self.gbTextFieldDelegate?.gbLeftView?(textField)
     }
     
     func addViews(){
