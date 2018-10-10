@@ -39,6 +39,15 @@ public class GBTextField: UITextField {
     }
     
     @IBInspectable
+    public var labelText: String = ""{
+        didSet{
+            if labelText != ""{
+                self.labelPlaceholder.text = labelText
+            }
+        }
+    }
+    
+    @IBInspectable
     public var titleLabelColor: UIColor = .darkGray
     
     @IBInspectable
@@ -140,7 +149,6 @@ public class GBTextField: UITextField {
     lazy var labelPlaceholder: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = self.placeholder
         lbl.textColor = .clear
         lbl.font = self.font
         return lbl
@@ -198,7 +206,11 @@ public class GBTextField: UITextField {
             viewLine?.backgroundColor = errorColor
             if let text = text{
                 if text.count > 0{
+                    labelPlaceholder.isHidden = false
                     labelPlaceholder.textColor = errorColor
+                }else{
+                    labelPlaceholder.textColor = .clear
+                    labelPlaceholder.isHidden = true
                 }
             }
         }else{
@@ -227,7 +239,11 @@ public class GBTextField: UITextField {
             }
         }
         addSubview(labelPlaceholder)
-        labelPlaceholder.text = placeholder
+        if labelText != ""{
+            labelPlaceholder.text = labelText
+        }else{
+            labelPlaceholder.text = placeholder
+        }
         self.constraintFloatingLabelTop = self.labelPlaceholder.topAnchor.constraint(equalTo: topAnchor, constant: 0)
         self.constraintFloatingLabelTop.isActive = true
         self.constraintFloatingLabelLeft = self.labelPlaceholder.leftAnchor.constraint(equalTo: leftAnchor, constant: 0)
@@ -270,7 +286,11 @@ public class GBTextField: UITextField {
     }
     
     override public func becomeFirstResponder() -> Bool {
-        self.labelPlaceholder.text = placeholder
+        if labelText != ""{
+            labelPlaceholder.text = labelText
+        }else{
+            labelPlaceholder.text = placeholder
+        }
         if selectedLineHeight == 0{
             constraintLineHeight?.constant = lineHeight
         }else{
@@ -311,6 +331,7 @@ public class GBTextField: UITextField {
     @objc func textFieldDidChange(_ textField:UITextField){
         if let text = self.text{
             if text.count > 0{
+                labelPlaceholder.isHidden = false
                 if self.showError != false{
                     self.showError = false
                     self.labelPlaceholder.textColor = self.selectedTitleColor
