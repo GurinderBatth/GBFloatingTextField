@@ -250,6 +250,13 @@ public class GBTextField: UITextField {
         self.constraintFloatingLabelLeft.isActive = true
         self.constraintFloatingLabelHeight = self.labelPlaceholder.heightAnchor.constraint(equalTo: self.heightAnchor, constant: 0)
         self.constraintFloatingLabelHeight.isActive = true
+        
+        if (text?.count)! > 0{
+            self.setupLine()
+            self.textFieldDidChange(self)
+            self.resignFirstResponder()
+        }
+
     }
     
     func setupLine(){
@@ -285,6 +292,7 @@ public class GBTextField: UITextField {
         labelError.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
+    @discardableResult
     override public func becomeFirstResponder() -> Bool {
         if labelText != ""{
             labelPlaceholder.text = labelText
@@ -309,6 +317,7 @@ public class GBTextField: UITextField {
         return super.becomeFirstResponder()
     }
     
+    @discardableResult
     override public func resignFirstResponder() -> Bool {
         constraintLineHeight?.constant = lineHeight
         self.viewLine?.backgroundColor = lineColor
