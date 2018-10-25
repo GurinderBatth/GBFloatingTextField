@@ -71,7 +71,7 @@ public class GBTextField: UITextField {
     @IBInspectable
     public var placeholderColor: UIColor?{
         didSet{
-            self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor:placeholderColor ?? UIColor.lightGray])
+            self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "", attributes: [NSAttributedStringKey.foregroundColor:placeholderColor ?? UIColor.lightGray])
         }
     }
     

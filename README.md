@@ -31,7 +31,7 @@ Gurinder Batth, mr.gsbatth@gmail.com
 
 ## Credits
 
-Credits for the Secure Entry bug , and improving it with the help of [SkyFloatingLabelTextField] (https://github.com/Skyscanner/SkyFloatingLabelTextField).
+Credits for the Secure Entry bug , and improving it with the help of [SkyFloatingLabelTextField](https://github.com/Skyscanner/SkyFloatingLabelTextField).
 
 ## License
 
