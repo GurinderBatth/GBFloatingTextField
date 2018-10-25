@@ -14,8 +14,6 @@ import UIKit
     @objc optional func gbRightView(_ textField: GBTextField?)
 }
 
-typealias GBFloatingDelegate = GBTextFieldDelegate & UITextFieldDelegate
-
 @IBDesignable
 public class GBTextField: UITextField {
     
@@ -71,9 +69,20 @@ public class GBTextField: UITextField {
     }
     
     @IBInspectable
+    public var placeholderColor: UIColor?{
+        didSet{
+            self.attributedPlaceholder = NSAttributedString(string: self.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor:placeholderColor ?? UIColor.lightGray])
+        }
+    }
+    
+    @IBInspectable
     public var rightImage: UIImage?{
         didSet{
-            viewRight = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.size.height, height: self.frame.size.height))
+            let ratio = (rightImage?.size.height)! / (rightImage?.size.width)!
+            let newWidth = self.frame.height / ratio
+            
+            viewRight = UIView(frame: CGRect(x: 0, y: 0, width: newWidth, height: self.frame.size.height))
+            
             if rightImageClicable{
                 viewRight!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(rightViewSelected(_:))))
             }
@@ -87,7 +96,7 @@ public class GBTextField: UITextField {
             imageView.bottomAnchor.constraint(equalTo: viewRight!.bottomAnchor, constant: -7).isActive = true
             imageView.rightAnchor.constraint(equalTo: viewRight!.rightAnchor, constant: -7).isActive = true
             imageView.clipsToBounds = true
-            imageView.contentMode = .scaleAspectFit
+            imageView.contentMode = .scaleToFill
             self.rightView = viewRight
             self.rightViewMode = .always
         }
@@ -96,7 +105,9 @@ public class GBTextField: UITextField {
     @IBInspectable
     public var leftImage: UIImage?{
         didSet{
-            viewLeft = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.size.height, height: self.frame.size.height))
+            let ratio = (leftImage?.size.height)! / (leftImage?.size.width)!
+            let newWidth = self.frame.height / ratio
+            viewLeft = UIView(frame: CGRect(x: 0, y: 0, width: newWidth, height: self.frame.size.height))
             if leftImageClicable{
                 if viewLeft != nil{
                     viewLeft?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(leftViewSelected(_:))))
@@ -112,7 +123,7 @@ public class GBTextField: UITextField {
             imageView.bottomAnchor.constraint(equalTo: viewLeft!.bottomAnchor, constant: -7).isActive = true
             imageView.rightAnchor.constraint(equalTo: viewLeft!.rightAnchor, constant: -7).isActive = true
             imageView.clipsToBounds = true
-            imageView.contentMode = .scaleAspectFit
+            imageView.contentMode = .scaleToFill
             self.leftView = viewLeft
             self.leftViewMode = .always
         }
@@ -134,9 +145,7 @@ public class GBTextField: UITextField {
         }
     }
     
-    //MARK:-  Public Function
-    
-    //MARK:-  Private Properties
+//MARK:-  Private Properties
     var viewRight: UIView?
     var viewLeft: UIView?
     
@@ -219,7 +228,7 @@ public class GBTextField: UITextField {
         }
     }
     
-    //MARK:-  Private Functions
+//MARK:-  Private Functions
     
     @objc func rightViewSelected(_ gesture: UITapGestureRecognizer){
         let textField = gesture.view?.superview as? GBTextField
@@ -246,17 +255,17 @@ public class GBTextField: UITextField {
         }
         self.constraintFloatingLabelTop = self.labelPlaceholder.topAnchor.constraint(equalTo: topAnchor, constant: 0)
         self.constraintFloatingLabelTop.isActive = true
-        self.constraintFloatingLabelLeft = self.labelPlaceholder.leftAnchor.constraint(equalTo: leftAnchor, constant: 0)
-        self.constraintFloatingLabelLeft.isActive = true
+        self.labelPlaceholder.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        self.labelPlaceholder.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         self.constraintFloatingLabelHeight = self.labelPlaceholder.heightAnchor.constraint(equalTo: self.heightAnchor, constant: 0)
         self.constraintFloatingLabelHeight.isActive = true
-        
+        self.labelPlaceholder.textAlignment = self.textAlignment
         if (text?.count)! > 0{
             self.setupLine()
             self.textFieldDidChange(self)
             self.resignFirstResponder()
         }
-
+        
     }
     
     func setupLine(){
@@ -290,6 +299,15 @@ public class GBTextField: UITextField {
         labelError.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         labelError.textColor = errorColor
         labelError.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    }
+    
+    public override var isSecureTextEntry: Bool{
+        set{
+            super.isSecureTextEntry = newValue
+            fixSecureEntry()
+        }get{
+            return super.isSecureTextEntry
+        }
     }
     
     @discardableResult
@@ -374,3 +392,11 @@ public class GBTextField: UITextField {
     }
 }
 
+extension UITextField {
+    func fixSecureEntry() {
+        let beginning = beginningOfDocument
+        selectedTextRange = textRange(from: beginning, to: beginning)
+        let end = endOfDocument
+        selectedTextRange = textRange(from: end, to: end)
+    }
+}

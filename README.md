@@ -20,10 +20,30 @@ it, simply add the following line to your Podfile:
 pod 'GBFloatingTextField'
 ```
 
+## Contributing
+
+We welcome all contributions.
+
+
 ## Author
 
 Gurinder Batth, mr.gsbatth@gmail.com
 
+## Credits
+
+Credits for the Secure Entry bug , and improving it with the help of [SkyFloatingLabelTextField] (https://github.com/Skyscanner/SkyFloatingLabelTextField).
+
 ## License
 
 GBFloatingTextField is available under the MIT license. See the LICENSE file for more info.
+
+## Known Issue
+
+It wil not work if the clipsToBounds or masksToBounds property is true.
+
+## About Future Versions
+
+1. Working on make this Class for UITextView.
+2. Solve known issues
+3. We will try to make custom everything so everyone can use according to there needs.
+4. Will add RTL language support.
