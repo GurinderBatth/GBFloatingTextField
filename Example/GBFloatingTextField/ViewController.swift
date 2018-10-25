@@ -21,7 +21,6 @@ class ViewController: UIViewController {
         textField.lineHeight = 1
         textField.showErrorMessage("This is Text Error")
         self.view.addSubview(textField)
-        
     }
 
     override func didReceiveMemoryWarning() {

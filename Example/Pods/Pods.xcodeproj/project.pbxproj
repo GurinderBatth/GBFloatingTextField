@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D07E10AC016330A39B2CC13AFE81AEF /* Pods-GBFloatingTextField_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A2622AD58A84221580F6E9CB31FB9D7B /* Pods-GBFloatingTextField_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		181A06BB21819D48006A3887 /* GBFloatingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181A06BA21819D48006A3887 /* GBFloatingTextView.swift */; };
 		184291CB2169C13D00BB436F /* GBFloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184291CA2169C13D00BB436F /* GBFloatingTextField.swift */; };
 		3091285F720D45F23B32B584BFA74CCE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
 		627046A937B27D74BD97C5445305EE83 /* Pods-GBFloatingTextField_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E49ECF7481D49DF104C8B62943CF1FB /* Pods-GBFloatingTextField_Tests-dummy.m */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		0E49ECF7481D49DF104C8B62943CF1FB /* Pods-GBFloatingTextField_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-GBFloatingTextField_Tests-dummy.m"; sourceTree = "<group>"; };
 		13D14DFA65C1A1CE9DEE26719875854D /* GBFloatingTextField.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GBFloatingTextField.xcconfig; sourceTree = "<group>"; };
+		181A06BA21819D48006A3887 /* GBFloatingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GBFloatingTextView.swift; path = GBFloatingTextField/Classes/GBFloatingTextView.swift; sourceTree = "<group>"; };
 		184291CA2169C13D00BB436F /* GBFloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GBFloatingTextField.swift; path = GBFloatingTextField/Classes/GBFloatingTextField.swift; sourceTree = "<group>"; };
 		1917F42DEEEBFDC24625EA8F8CCD8B95 /* Pods-GBFloatingTextField_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GBFloatingTextField_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		1DD4345ABD5337E5158858A90D66CBD8 /* Pods-GBFloatingTextField_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GBFloatingTextField_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				82A1A60CDEE83468A4C09088E6A2A1E3 /* Pod */,
 				7754850319D8359D0161A94D1D6A308F /* Support Files */,
 				184291CA2169C13D00BB436F /* GBFloatingTextField.swift */,
+				181A06BA21819D48006A3887 /* GBFloatingTextView.swift */,
 			);
 			name = GBFloatingTextField;
 			path = ../..;
@@ -317,7 +320,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1000;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -345,6 +348,7 @@
 			files = (
 				184291CB2169C13D00BB436F /* GBFloatingTextField.swift in Sources */,
 				B45A3F65891BF4BD15BB3353A5021103 /* GBFloatingTextField-dummy.m in Sources */,
+				181A06BB21819D48006A3887 /* GBFloatingTextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,7 +411,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -637,6 +641,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 3.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -700,7 +705,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
