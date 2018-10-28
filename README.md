@@ -62,7 +62,7 @@ textView.selectedColor = .red
 
 To enable Floating Text in GBFlaotingTextView. Please enable "isFloatingLabel" , expect this will hide the Floating text like placeholder text in UITextField.
 
-"isFloatingLabel" is false by default.
+`isFloatingLabel` is `false` by default. Please make it `true` for Floating Placeholder.
 
 You can change these all Properties in Interface builder for both GBFloatingTextField and GBFloatingTextView.
 
