@@ -398,12 +398,3 @@ public class GBTextField: UITextField {
         }
     }
 }
-
-extension UITextField {
-    func fixSecureEntry() {
-        let beginning = beginningOfDocument
-        selectedTextRange = textRange(from: beginning, to: beginning)
-        let end = endOfDocument
-        selectedTextRange = textRange(from: end, to: end)
-    }
-}

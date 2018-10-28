@@ -10,6 +10,8 @@
 		0D07E10AC016330A39B2CC13AFE81AEF /* Pods-GBFloatingTextField_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A2622AD58A84221580F6E9CB31FB9D7B /* Pods-GBFloatingTextField_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		181A06BB21819D48006A3887 /* GBFloatingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181A06BA21819D48006A3887 /* GBFloatingTextView.swift */; };
 		184291CB2169C13D00BB436F /* GBFloatingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184291CA2169C13D00BB436F /* GBFloatingTextField.swift */; };
+		18D18B612185A97B00DA6224 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D18B602185A97B00DA6224 /* UITextField+Extension.swift */; };
+		18D18B632185A99800DA6224 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D18B622185A99800DA6224 /* UILabel+Extension.swift */; };
 		3091285F720D45F23B32B584BFA74CCE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A16F4CFC63FAC439D7A04994F579A03 /* Foundation.framework */; };
 		627046A937B27D74BD97C5445305EE83 /* Pods-GBFloatingTextField_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E49ECF7481D49DF104C8B62943CF1FB /* Pods-GBFloatingTextField_Tests-dummy.m */; };
 		731757A05F55A1563DB1DBC3232C52B1 /* Pods-GBFloatingTextField_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7081742F226628DF4B76548D2061AABF /* Pods-GBFloatingTextField_Example-dummy.m */; };
@@ -42,6 +44,8 @@
 		13D14DFA65C1A1CE9DEE26719875854D /* GBFloatingTextField.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GBFloatingTextField.xcconfig; sourceTree = "<group>"; };
 		181A06BA21819D48006A3887 /* GBFloatingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GBFloatingTextView.swift; path = GBFloatingTextField/Classes/GBFloatingTextView.swift; sourceTree = "<group>"; };
 		184291CA2169C13D00BB436F /* GBFloatingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GBFloatingTextField.swift; path = GBFloatingTextField/Classes/GBFloatingTextField.swift; sourceTree = "<group>"; };
+		18D18B602185A97B00DA6224 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UITextField+Extension.swift"; path = "GBFloatingTextField/Classes/UITextField+Extension.swift"; sourceTree = "<group>"; };
+		18D18B622185A99800DA6224 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UILabel+Extension.swift"; path = "GBFloatingTextField/Classes/UILabel+Extension.swift"; sourceTree = "<group>"; };
 		1917F42DEEEBFDC24625EA8F8CCD8B95 /* Pods-GBFloatingTextField_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-GBFloatingTextField_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		1DD4345ABD5337E5158858A90D66CBD8 /* Pods-GBFloatingTextField_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-GBFloatingTextField_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		23B9407806DD3A5ADB10C05735DDC7B4 /* Pods-GBFloatingTextField_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-GBFloatingTextField_Tests-frameworks.sh"; sourceTree = "<group>"; };
@@ -225,6 +229,8 @@
 				7754850319D8359D0161A94D1D6A308F /* Support Files */,
 				184291CA2169C13D00BB436F /* GBFloatingTextField.swift */,
 				181A06BA21819D48006A3887 /* GBFloatingTextView.swift */,
+				18D18B602185A97B00DA6224 /* UITextField+Extension.swift */,
+				18D18B622185A99800DA6224 /* UILabel+Extension.swift */,
 			);
 			name = GBFloatingTextField;
 			path = ../..;
@@ -347,6 +353,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				184291CB2169C13D00BB436F /* GBFloatingTextField.swift in Sources */,
+				18D18B612185A97B00DA6224 /* UITextField+Extension.swift in Sources */,
+				18D18B632185A99800DA6224 /* UILabel+Extension.swift in Sources */,
 				B45A3F65891BF4BD15BB3353A5021103 /* GBFloatingTextField-dummy.m in Sources */,
 				181A06BB21819D48006A3887 /* GBFloatingTextView.swift in Sources */,
 			);

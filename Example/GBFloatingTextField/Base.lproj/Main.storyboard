@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cRb-3W-IhI" customClass="GBTextField" customModule="GBFloatingTextField">
-                                <rect key="frame" x="36" y="318.5" width="303" height="30"/>
+                                <rect key="frame" x="36" y="40" width="303" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="md4-14-mwz"/>
                                 </constraints>
@@ -41,7 +41,7 @@
                         <constraints>
                             <constraint firstItem="cRb-3W-IhI" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="20" id="3wr-Qz-cb2"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cRb-3W-IhI" secondAttribute="trailing" constant="20" id="8UV-Zh-XZC"/>
-                            <constraint firstItem="cRb-3W-IhI" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="YPq-BR-XnB"/>
+                            <constraint firstItem="cRb-3W-IhI" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="20" id="pEW-ut-vxg"/>
                         </constraints>
                     </view>
                 </viewController>
