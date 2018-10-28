@@ -110,6 +110,20 @@ public class GBTextField: UITextField {
     }
     
     @IBInspectable
+    public var padding: CGFloat = 0{
+        didSet{
+            if rightImage == nil{
+                self.rightView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: self.frame.height))
+                self.rightViewMode = .always
+            }
+            if leftImage == nil{
+                self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: padding, height: self.frame.height))
+                self.leftViewMode = .always
+            }
+        }
+    }
+    
+    @IBInspectable
     public var leftImage: UIImage?{
         didSet{
             let ratio = (leftImage?.size.height)! / (leftImage?.size.width)!

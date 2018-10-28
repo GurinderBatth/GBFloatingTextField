@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textField = GBTextField(frame: CGRect(x:10, y: 100, width: UIScreen.main.bounds.width - 20, height: 40))
+        textField = GBTextField(frame: CGRect(x:10, y: 200, width: UIScreen.main.bounds.width - 20, height: 40))
         textField.lineColor = .black
         textField.titleLabelColor = .black
         textField.lineHeight = 1
