@@ -19,6 +19,9 @@ public class GBFloatingTextView: UITextView {
                 if constraintPlaceholderLabelTop != nil{
                     constraintPlaceholderLabelTop.constant = 15
                 }
+                if self.text.count > 0{
+                    self.refreshPlaceholder()
+                }
             }
         }
     }
@@ -124,12 +127,9 @@ public class GBFloatingTextView: UITextView {
         if self.text.count > 0{
             if !isFloatingLabel{
                 self.placeholderLabel.isHidden = true
-            }else{
-                self.refreshPlaceholder()
             }
+            self.refreshPlaceholder()
         }
-        
-        self.placeholderLabel.isHidden = self.isHidden
     }
     
     private func addFloatingLabel(){
@@ -157,7 +157,11 @@ public class GBFloatingTextView: UITextView {
                         if self.selectedColor == nil{
                             self.selectedColor = self.topPlaceholderColor
                         }
-                        self.placeholderLabel.textColor = self.selectedColor
+                        if self.isFirstResponder{
+                            self.placeholderLabel.textColor = self.selectedColor
+                        }else{
+                            self.placeholderLabel.textColor = self.topPlaceholderColor
+                        }
                     }
                 }
             }else{
@@ -173,6 +177,7 @@ public class GBFloatingTextView: UITextView {
                     self.placeholderLabel.textColor = self.placeholderColor
                 }
             }else{
+                self.placeholderLabel.textColor = self.placeholderColor
                 self.placeholderLabel.isHidden = false
             }
         }
