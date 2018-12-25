@@ -83,12 +83,12 @@ public class GBFloatingTextView: UITextView {
         }
     }
     
-    init(frame: CGRect, superView: UIView) {
+    public init(frame: CGRect, superView: UIView) {
         super.init(frame: frame, textContainer: nil)
         superView.addSubview(self)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
