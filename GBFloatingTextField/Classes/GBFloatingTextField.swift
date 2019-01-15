@@ -110,6 +110,30 @@ public class GBTextField: UITextField {
     }
     
     @IBInspectable
+    public var rightImageSquare: UIImage?{
+        didSet{
+            let newWidth = 20
+            viewRight = UIView(frame: CGRect(x: 0, y: 0, width: newWidth + 14, height: newWidth))
+            
+            if rightImageClicable{
+                viewRight!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(rightViewSelected(_:))))
+            }
+            let imageView = UIImageView(image: rightImage)
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.isUserInteractionEnabled = true
+            viewRight?.addSubview(imageView)
+            
+            imageView.centerYAnchor.constraint(equalTo: viewRight!.centerYAnchor, constant: 0).isActive = true
+            imageView.leftAnchor.constraint(equalTo: viewRight!.leftAnchor, constant: 7).isActive = true
+            imageView.rightAnchor.constraint(equalTo: viewRight!.rightAnchor, constant: -7).isActive = true
+            imageView.clipsToBounds = true
+            imageView.contentMode = .scaleAspectFit
+            self.rightView = viewRight
+            self.rightViewMode = .always
+        }
+    }
+    
+    @IBInspectable
     public var padding: CGFloat = 0{
         didSet{
             if rightImage == nil{
@@ -149,6 +173,32 @@ public class GBTextField: UITextField {
             self.leftViewMode = .always
         }
     }
+    
+    @IBInspectable
+    public var leftImageSquare: UIImage?{
+        didSet{
+            let newWidth = 20
+            viewLeft = UIView(frame: CGRect(x: 0, y: 0, width: newWidth + 14, height: newWidth))
+            if leftImageClicable{
+                if viewLeft != nil{
+                    viewLeft?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(leftViewSelected(_:))))
+                }
+            }
+            let imageView = UIImageView(image: leftImage)
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.isUserInteractionEnabled = true
+            viewLeft?.addSubview(imageView)
+            
+            imageView.centerYAnchor.constraint(equalTo: viewLeft!.centerYAnchor, constant: 0).isActive = true
+            imageView.leftAnchor.constraint(equalTo: viewLeft!.leftAnchor, constant: 7).isActive = true
+            imageView.rightAnchor.constraint(equalTo: viewLeft!.rightAnchor, constant:-7).isActive = true
+            imageView.clipsToBounds = true
+            imageView.contentMode = .scaleAspectFit
+            self.leftView = viewLeft
+            self.leftViewMode = .always
+        }
+    }
+    
     
     public var rightImageClicable: Bool = false{
         didSet{
