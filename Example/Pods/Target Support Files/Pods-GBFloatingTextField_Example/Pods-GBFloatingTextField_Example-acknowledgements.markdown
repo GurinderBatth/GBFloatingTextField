@@ -3,7 +3,7 @@ This application makes use of the following third party libraries:
 
 ## GBFloatingTextField
 
-Copyright (c) 2018 mr.gsbatth@gmail.com <mr.gsbatth@gmail.com>
+Copyright (c) 2018 Gurinder Batth <mr.gsbatth@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

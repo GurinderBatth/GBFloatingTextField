@@ -1,5 +1,5 @@
 PODS:
-  - GBFloatingTextField (0.1.0)
+  - GBFloatingTextField (1.0.5)
 
 DEPENDENCIES:
   - GBFloatingTextField (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  GBFloatingTextField: 507e57d8210ebb9893a6bed5d63584662a1a6e44
+  GBFloatingTextField: c2d521ed3197e1d16bd8fc97cad46ec399d0b599
 
 PODFILE CHECKSUM: 7639ffd4c19ec10b6b2c6b648fea9613e2f43bc9
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.8.4

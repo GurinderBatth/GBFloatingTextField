@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GBFloatingTextField'
-  s.version          = '1.0.5'
+  s.version          = '2.0.0'
   s.summary          = 'GBFloatingTextField is a Floting TextField.'
 
 # This description is used to generate tags and improve search results.
@@ -32,7 +32,7 @@ GBFloatingTextField is a Floting TextField. Which also contains Left Image and R
 
   s.source_files = 'GBFloatingTextField/Classes/**/*'
   
-  s.swift_version = '3.2'
+  s.swift_version = '4.0'
   
   # s.resource_bundles = {
   #   'GBFloatingTextField' => ['GBFloatingTextField/Assets/*.png']

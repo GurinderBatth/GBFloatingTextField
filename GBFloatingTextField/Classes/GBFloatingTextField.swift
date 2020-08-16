@@ -8,17 +8,25 @@
 
 import UIKit
 
-@objc public protocol GBTextFieldDelegate: class
-{
-    @objc optional func gbLeftView(_ textField: GBTextField?)
-    @objc optional func gbRightView(_ textField: GBTextField?)
+public protocol GBTextFieldDelegate: class{
+    func gbLeftView(_ textField: GBTextField?)
+    func gbRightView(_ textField: GBTextField?)
+}
+
+public extension GBTextFieldDelegate{
+    func gbLeftView(_ textField: GBTextField?){
+        print("Please add GBTextFieldDelegate & gbLeftView(_ textField: GBTextField?) function")
+    }
+    func gbRightView(_ textField: GBTextField?){
+        print("Please add GBTextFieldDelegate & gbRightView(_ textField: GBTextField?) function")
+    }
 }
 
 @IBDesignable
 public class GBTextField: UITextField {
     
     //MARK:-  Public Properties
-    @IBOutlet public weak var gbTextFieldDelegate: GBTextFieldDelegate?
+    public weak var gbTextFieldDelegate: GBTextFieldDelegate?
     
     @IBInspectable
     public var lineHeight: CGFloat = 0{
@@ -48,10 +56,20 @@ public class GBTextField: UITextField {
     @IBInspectable
     public var titleLabelColor: UIColor = .darkGray
     
+    public var titleFont: UIFont?{
+        didSet{
+            self.labelPlaceholder.font = titleFont
+        }
+    }
+    
     @IBInspectable
     public var lineColor: UIColor = .darkGray{
         didSet{
-            self.viewLine?.backgroundColor = lineColor
+            if !showError {
+                self.viewLine?.backgroundColor = lineColor
+            }else{
+                self.viewLine?.backgroundColor = errorColor
+            }
         }
     }
     
@@ -65,6 +83,15 @@ public class GBTextField: UITextField {
     public var errorColor: UIColor = .red{
         didSet{
             self.labelError.textColor = errorColor
+            if showError {
+                self.showErrorMessage(self.showError, self.errorMessage ?? "")
+            }
+        }
+    }
+    
+    public var errorFont: UIFont?{
+        didSet{
+            self.labelError.font = errorFont
         }
     }
     
@@ -89,8 +116,7 @@ public class GBTextField: UITextField {
             let newWidth = self.frame.height / ratio
             
             viewRight = UIView(frame: CGRect(x: 0, y: 0, width: newWidth, height: self.frame.size.height))
-            
-            if rightImageClicable{
+            if viewRight != nil{
                 viewRight!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(rightViewSelected(_:))))
             }
             let imageView = UIImageView(image: rightImage)
@@ -112,20 +138,28 @@ public class GBTextField: UITextField {
     @IBInspectable
     public var rightImageSquare: UIImage?{
         didSet{
-            let newWidth = 20
-            viewRight = UIView(frame: CGRect(x: 0, y: 0, width: newWidth + 14, height: newWidth))
-            
-            if rightImageClicable{
+            var newWidth: CGFloat = 20
+            if self.frame.height > 25 && self.frame.height < 30{
+                newWidth = 25
+            }else if self.frame.height >= 30{
+                newWidth = 30
+            }
+            let x = viewRight?.frame.origin.x ?? 0
+            let y = viewRight?.frame.origin.y ?? 0
+            viewRight = UIView(frame: CGRect(x: x, y: y, width: newWidth, height: newWidth))
+            if viewRight != nil{
                 viewRight!.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(rightViewSelected(_:))))
             }
-            let imageView = UIImageView(image: rightImage)
+            let imageView = UIImageView(image: rightImageSquare)
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.isUserInteractionEnabled = true
             viewRight?.addSubview(imageView)
             
-            imageView.centerYAnchor.constraint(equalTo: viewRight!.centerYAnchor, constant: 0).isActive = true
-            imageView.leftAnchor.constraint(equalTo: viewRight!.leftAnchor, constant: 7).isActive = true
-            imageView.rightAnchor.constraint(equalTo: viewRight!.rightAnchor, constant: -7).isActive = true
+            imageView.rightAnchor.constraint(equalTo: viewRight!.rightAnchor, constant: -5).isActive = true
+            imageView.leftAnchor.constraint(equalTo: viewRight!.leftAnchor, constant: 5).isActive = true
+            imageView.centerYAnchor.constraint(equalTo: self.viewRight!.centerYAnchor).isActive = true
+            imageView.heightAnchor.constraint(equalToConstant: CGFloat(newWidth - 5)).isActive = true
+            imageView.widthAnchor.constraint(equalToConstant: CGFloat(newWidth - 5)).isActive = true
             imageView.clipsToBounds = true
             imageView.contentMode = .scaleAspectFit
             self.rightView = viewRight
@@ -153,10 +187,8 @@ public class GBTextField: UITextField {
             let ratio = (leftImage?.size.height)! / (leftImage?.size.width)!
             let newWidth = self.frame.height / ratio
             viewLeft = UIView(frame: CGRect(x: 0, y: 0, width: newWidth, height: self.frame.size.height))
-            if leftImageClicable{
-                if viewLeft != nil{
-                    viewLeft?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(leftViewSelected(_:))))
-                }
+            if viewLeft != nil{
+                viewLeft?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(leftViewSelected(_:))))
             }
             let imageView = UIImageView(image: leftImage)
             imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -177,21 +209,25 @@ public class GBTextField: UITextField {
     @IBInspectable
     public var leftImageSquare: UIImage?{
         didSet{
-            let newWidth = 20
-            viewLeft = UIView(frame: CGRect(x: 0, y: 0, width: newWidth + 14, height: newWidth))
-            if leftImageClicable{
-                if viewLeft != nil{
-                    viewLeft?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(leftViewSelected(_:))))
-                }
+            var newWidth = 20
+            if self.frame.height > 25 && self.frame.height < 30{
+                newWidth = 25
+            }else if self.frame.height >= 30{
+                newWidth = 30
             }
-            let imageView = UIImageView(image: leftImage)
+            viewLeft = UIView(frame: CGRect(x: 0, y: 0, width: newWidth + 14, height: newWidth))
+            if viewLeft != nil{
+                viewLeft?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(leftViewSelected(_:))))
+            }
+            let imageView = UIImageView(image: leftImageSquare)
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.isUserInteractionEnabled = true
             viewLeft?.addSubview(imageView)
-            
-            imageView.centerYAnchor.constraint(equalTo: viewLeft!.centerYAnchor, constant: 0).isActive = true
-            imageView.leftAnchor.constraint(equalTo: viewLeft!.leftAnchor, constant: 7).isActive = true
-            imageView.rightAnchor.constraint(equalTo: viewLeft!.rightAnchor, constant:-7).isActive = true
+            imageView.leftAnchor.constraint(equalTo: viewLeft!.leftAnchor, constant: 5).isActive = true
+            imageView.rightAnchor.constraint(equalTo: viewLeft!.rightAnchor, constant:-5).isActive = true
+            imageView.centerYAnchor.constraint(equalTo: self.viewLeft!.centerYAnchor).isActive = true
+            imageView.heightAnchor.constraint(equalToConstant: CGFloat(newWidth - 5)).isActive = true
+            imageView.widthAnchor.constraint(equalToConstant: CGFloat(newWidth - 5)).isActive = true
             imageView.clipsToBounds = true
             imageView.contentMode = .scaleAspectFit
             self.leftView = viewLeft
@@ -217,16 +253,21 @@ public class GBTextField: UITextField {
     }
     
 //MARK:-  Private Properties
-    var viewRight: UIView?
-    var viewLeft: UIView?
+    private var viewRight: UIView?
+    private var viewLeft: UIView?
     
-    lazy var viewLine:UIView? = {
+    private var textString: String?
+    private var errorMessage: String?
+    
+    private var defaultTextColor: UIColor?
+    
+    private lazy var viewLine:UIView? = {
         let prntView = UIView()
         prntView.translatesAutoresizingMaskIntoConstraints = false
         return prntView
     }()
     
-    lazy var labelPlaceholder: UILabel = {
+    private lazy var labelPlaceholder: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.textColor = .clear
@@ -234,7 +275,7 @@ public class GBTextField: UITextField {
         return lbl
     }()
     
-    lazy var labelError: UILabel = {
+    private lazy var labelError: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.font = self.font
@@ -244,12 +285,12 @@ public class GBTextField: UITextField {
         return lbl
     }()
     
-    var constraintFloatingLabelTop: NSLayoutConstraint!
-    var constraintFloatingLabelLeft: NSLayoutConstraint!
-    var constraintFloatingLabelHeight: NSLayoutConstraint!
-    var constraintLineHeight: NSLayoutConstraint?
+    private var constraintFloatingLabelTop: NSLayoutConstraint!
+    private var constraintFloatingLabelLeft: NSLayoutConstraint!
+    private var constraintFloatingLabelHeight: NSLayoutConstraint!
+    private var constraintLineHeight: NSLayoutConstraint?
     
-    var showError: Bool = false{
+    private var showError: Bool = false{
         didSet{
             if showError{
                 self.setupError()
@@ -261,6 +302,7 @@ public class GBTextField: UITextField {
                     self.viewLine?.backgroundColor = lineColor
                     self.labelPlaceholder.textColor = titleLabelColor
                 }
+                self.textColor = self.defaultTextColor
                 self.labelError.isHidden = true
             }
         }
@@ -276,42 +318,67 @@ public class GBTextField: UITextField {
         self.addViews()
     }
     
-    public func showErrorMessage(_ error: String){
-        if error.count > 0{
-            self.showError = true
+    public override func prepareForInterfaceBuilder() {
+        self.addViews()
+    }
+    
+    public override var text: String?{
+        set{
+            self.textString = newValue
+            super.text = newValue
+            if !(newValue?.isEmpty ?? true){
+                self.showFloatingLabel()
+            }
+        }get{
+            return super.text
+        }
+    }
+    
+    public override var textColor: UIColor?{
+        set{
+            if newValue != errorColor {
+                self.defaultTextColor = newValue
+            }
+            if !self.showError{
+                super.textColor = newValue
+            }else{
+                super.textColor = self.errorColor
+            }
+        }get{
+            return super.textColor
+        }
+    }
+    
+    public func showErrorMessage(_ showError: Bool = true, _ error: String = ""){
+        if showError {
+            self.errorMessage = error
             self.setupError()
             self.labelError.isHidden = false
             labelError.textColor = errorColor
             labelError.text = error
             viewLine?.backgroundColor = errorColor
-            if let text = text{
-                if text.count > 0{
-                    labelPlaceholder.isHidden = false
-                    labelPlaceholder.textColor = errorColor
-                }else{
-                    labelPlaceholder.textColor = .clear
-                    labelPlaceholder.isHidden = true
-                }
-            }
-        }else{
-            self.showError = false
-            self.labelError.isHidden = true
+            self.textColor = errorColor
+            self.labelPlaceholder.textColor = errorColor
+        }
+        self.showError = showError
+        if (self.text?.isEmpty ?? true){
+            self.hideFloatingLabel()
         }
     }
     
 //MARK:-  Private Functions
     
-    @objc func rightViewSelected(_ gesture: UITapGestureRecognizer){
+    @objc private func rightViewSelected(_ gesture: UITapGestureRecognizer){
         let textField = gesture.view?.superview as? GBTextField
-        self.gbTextFieldDelegate?.gbRightView?(textField)
+        self.gbTextFieldDelegate?.gbRightView(textField)
     }
     
-    @objc func leftViewSelected(_ gesture: UITapGestureRecognizer){
+    @objc private func leftViewSelected(_ gesture: UITapGestureRecognizer){
         let textField = gesture.view?.superview as? GBTextField
-        self.gbTextFieldDelegate?.gbLeftView?(textField)
+        self.gbTextFieldDelegate?.gbLeftView(textField)
     }
     
-    func addViews(){
+    private func addViews(){
         self.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         for subView in self.subviews{
             if subView == labelPlaceholder{
@@ -326,20 +393,20 @@ public class GBTextField: UITextField {
         }
         self.constraintFloatingLabelTop = self.labelPlaceholder.topAnchor.constraint(equalTo: topAnchor, constant: 0)
         self.constraintFloatingLabelTop.isActive = true
-        self.labelPlaceholder.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        self.labelPlaceholder.leftAnchor.constraint(equalTo: self.leftView?.rightAnchor ?? self.leftAnchor).isActive = true
         self.labelPlaceholder.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         self.constraintFloatingLabelHeight = self.labelPlaceholder.heightAnchor.constraint(equalTo: self.heightAnchor, constant: 0)
         self.constraintFloatingLabelHeight.isActive = true
         self.labelPlaceholder.textAlignment = self.textAlignment
-        if (text?.count)! > 0{
+        if (self.text?.count ?? 0) > 0{
             self.setupLine()
             self.textFieldDidChange(self)
             self.resignFirstResponder()
         }
-        
+        self.defaultTextColor = self.textColor
     }
     
-    func setupLine(){
+    private func setupLine(){
         if lineHeight != 0{
             for subview in self.subviews{
                 if subview == self.viewLine{
@@ -358,18 +425,17 @@ public class GBTextField: UITextField {
         }
     }
     
-    func setupError(){
+    private func setupError(){
         for subview in self.subviews{
             if subview == self.labelError{
                 return
             }
         }
         addSubview(self.labelError)
-        labelError.topAnchor.constraint(equalTo: self.bottomAnchor, constant: lineHeight).isActive = true
+        labelError.topAnchor.constraint(equalTo: self.bottomAnchor, constant: lineHeight + 3).isActive = true
         labelError.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
         labelError.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         labelError.textColor = errorColor
-        labelError.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     public override var isSecureTextEntry: Bool{
@@ -383,24 +449,32 @@ public class GBTextField: UITextField {
     
     @discardableResult
     override public func becomeFirstResponder() -> Bool {
-        if labelText != ""{
-            labelPlaceholder.text = labelText
-        }else{
-            labelPlaceholder.text = placeholder
+        self.setupLabelText()
+        if !showError{
+            self.viewLine?.backgroundColor = selectedLineColor
         }
+        let count = self.text?.count ?? 0
+        if count == 0{
+            return super.becomeFirstResponder()
+        }
+        
         if selectedLineHeight == 0{
             constraintLineHeight?.constant = lineHeight
         }else{
             constraintLineHeight?.constant = selectedLineHeight
         }
-        self.viewLine?.backgroundColor = selectedLineColor
-        if let count = self.text?.count{
-            if count > 0{
-                self.labelPlaceholder.textColor = selectedTitleColor
-                if showError{
-                    viewLine?.backgroundColor = errorColor
-                    labelPlaceholder.textColor = errorColor
-                }
+        
+        if count > 0{
+            self.labelPlaceholder.textColor = selectedTitleColor
+            if showError{
+                viewLine?.backgroundColor = errorColor
+                labelPlaceholder.textColor = errorColor
+            }
+            self.showFloatingLabel()
+            if self.showError{
+                self.labelPlaceholder.textColor = self.errorColor
+            }else{
+                self.labelPlaceholder.textColor = self.selectedTitleColor
             }
         }
         return super.becomeFirstResponder()
@@ -426,39 +500,62 @@ public class GBTextField: UITextField {
         return super.resignFirstResponder()
     }
     
-    @objc func textFieldDidChange(_ textField:UITextField){
+    @objc private func textFieldDidChange(_ textField:UITextField){
         if let text = self.text{
             if text.count > 0{
                 labelPlaceholder.isHidden = false
-                if self.showError != false{
-                    self.showError = false
-                    self.labelPlaceholder.textColor = self.selectedTitleColor
-                    self.viewLine?.backgroundColor = self.selectedLineColor
-                }
                 if self.constraintFloatingLabelTop.constant != -15{
-                    self.constraintFloatingLabelHeight.isActive = false
-                    self.constraintFloatingLabelTop.constant = -15
-                    self.labelPlaceholder.font = UIFont.boldSystemFont(ofSize: 12)
-                    UIView.transition(with: self.labelPlaceholder, duration: 0.2, options: .transitionCrossDissolve, animations: {
-                        self.layoutIfNeeded()
-                        self.labelPlaceholder.textColor = self.selectedTitleColor
-                    }) { (completed) in
-                        
-                    }
+                    self.showFloatingLabel()
                 }
             }else{
-                self.constraintFloatingLabelHeight.isActive = false
-                self.constraintFloatingLabelHeight = self.labelPlaceholder.heightAnchor.constraint(equalTo: self.heightAnchor, constant: 0)
-                self.constraintFloatingLabelHeight.isActive = true
-                self.constraintFloatingLabelTop.constant = 20
-                UIView.transition(with: self.labelPlaceholder, duration: 0.2, options: .transitionCrossDissolve, animations: {
-                    self.layoutIfNeeded()
-                    self.labelPlaceholder.font = self.font
-                    self.labelPlaceholder.textColor = .clear
-                }) { (completed) in
-                    
-                }
+                self.hideFloatingLabel()
             }
+        }
+    }
+    
+    private func setupLabelText(){
+        if labelText != ""{
+            labelPlaceholder.text = labelText
+        }else{
+            labelPlaceholder.text = placeholder
+        }
+        if (self.text?.isEmpty ?? true){
+           self.hideFloatingLabel()
+        }
+    }
+    
+    private func showFloatingLabel(){
+        self.setupLabelText()
+        self.constraintFloatingLabelHeight.isActive = false
+        self.constraintFloatingLabelTop.constant = -15
+        self.labelPlaceholder.font = UIFont.boldSystemFont(ofSize: 12)
+        if self.showError{
+            self.labelPlaceholder.textColor = self.errorColor
+        }else{
+            if self.isEditing{
+                self.labelPlaceholder.textColor = self.selectedTitleColor
+            }else{
+                self.labelPlaceholder.textColor = self.titleLabelColor
+            }
+        }
+        UIView.transition(with: self.labelPlaceholder, duration: 0.2, options: .transitionCrossDissolve, animations: {
+            self.layoutIfNeeded()
+        }) { (completed) in
+            
+        }
+    }
+    
+    private func hideFloatingLabel(){
+        self.constraintFloatingLabelHeight.isActive = false
+        self.constraintFloatingLabelHeight = self.labelPlaceholder.heightAnchor.constraint(equalTo: self.heightAnchor, constant: 0)
+        self.constraintFloatingLabelHeight.isActive = true
+        self.constraintFloatingLabelTop.constant = 20
+        UIView.transition(with: self.labelPlaceholder, duration: 0.2, options: .transitionCrossDissolve, animations: {
+            self.layoutIfNeeded()
+            self.labelPlaceholder.font = self.font
+            self.labelPlaceholder.textColor = .clear
+        }) { (completed) in
+            
         }
     }
 }

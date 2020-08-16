@@ -34,9 +34,9 @@ public class GBFloatingTextView: UITextView {
             let UITextViewTextBeginEditing = UITextView.textDidBeginEditingNotification
             let UITextViewTextEndEditing = UITextView.textDidEndEditingNotification
             #else
-            let UITextViewTextDidChange = Notification.Name.UITextViewTextDidChange
-            let UITextViewTextBeginEditing = Notification.Name.UITextViewTextDidBeginEditing
-            let UITextViewTextEndEditing = Notification.Name.UITextViewTextDidEndEditing
+            let UITextViewTextDidChange = NSNotification.Name.UITextViewTextDidChange
+            let UITextViewTextBeginEditing = NSNotification.Name.UITextViewTextDidBeginEditing
+            let UITextViewTextEndEditing = NSNotification.Name.UITextViewTextDidEndEditing
             
             #endif
             NotificationCenter.default.addObserver(self, selector: #selector(self.refreshPlaceholder), name:UITextViewTextDidChange, object: self)
@@ -136,7 +136,7 @@ public class GBFloatingTextView: UITextView {
         #if swift(>=4.2)
         self.textContainerInset = UIEdgeInsets(top: 15, left: 5, bottom: 15, right: 10)
         #else
-        self.textContainerInset = UIEdgeInsetsMake(15, 5, 15, 10)
+        self.textContainerInset = UIEdgeInsets.init(top: 15, left: 5, bottom: 15, right: 10)
         #endif
         self.layoutIfNeeded()
     }
